@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  add_on_type: one
+  addonable: one
+  min: 1
+  max: 1
+
+two:
+  add_on_type: two
+  addonable: two
+  min: 1
+  max: 1

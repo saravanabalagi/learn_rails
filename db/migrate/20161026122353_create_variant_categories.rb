@@ -1,0 +1,10 @@
+class CreateVariantCategories < ActiveRecord::Migration[5.0]
+  def change
+    create_table :variant_categories do |t|
+      t.string :name
+
+      t.timestamps
+    end
+    add_index :variant_categories, :name, unique: true
+  end
+end

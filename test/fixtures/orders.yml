@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  order_status: one
+  address: one
+  sub_total: 9.99
+  delivery: 9.99
+  vat: 9.99
+  total: 9.99
+  payment_method: one
+
+two:
+  user: two
+  order_status: two
+  address: two
+  sub_total: 9.99
+  delivery: 9.99
+  vat: 9.99
+  total: 9.99
+  payment_method: two

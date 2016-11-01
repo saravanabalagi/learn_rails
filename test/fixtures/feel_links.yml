@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  feel: one
+  scale: 1
+  feelable: one
+
+two:
+  feel: two
+  scale: 1
+  feelable: two

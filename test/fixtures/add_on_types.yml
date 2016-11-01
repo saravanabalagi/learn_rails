@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  max: 1
+  min: 1
+  dish_variant: one
+
+two:
+  name: MyString
+  max: 1
+  min: 1
+  dish_variant: two

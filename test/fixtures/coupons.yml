@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  available: 1
+  used: 1
+  user: one
+  affects_surcharges: false
+  amount: 
+  min_cart_value: 9.99
+  percentage: 9.99
+  max_amount: 9.99
+  expiry: 2016-10-03 00:11:47
+  coupounable: one
+
+two:
+  name: MyString
+  description: MyString
+  available: 1
+  used: 1
+  user: two
+  affects_surcharges: false
+  amount: 
+  min_cart_value: 9.99
+  percentage: 9.99
+  max_amount: 9.99
+  expiry: 2016-10-03 00:11:47
+  coupounable: two

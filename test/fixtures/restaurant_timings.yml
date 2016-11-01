@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  opening_time: 2016-10-02 16:38:15
+  closing_time: 2016-10-02 16:38:15
+  restaurant: one
+
+two:
+  opening_time: 2016-10-02 16:38:15
+  closing_time: 2016-10-02 16:38:15
+  restaurant: two

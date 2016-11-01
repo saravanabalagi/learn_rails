@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  add_on: one
+  add_on_type_link: one
+  price: 9.99
+  selected: false
+
+two:
+  add_on: two
+  add_on_type_link: two
+  price: 9.99
+  selected: false
