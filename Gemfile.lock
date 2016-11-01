@@ -1,5 +1,5 @@
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     actioncable (5.0.0.1)
       actionpack (= 5.0.0.1)
@@ -92,6 +92,7 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.6.8.1-x86-mingw32)
       mini_portile2 (~> 2.1.0)
+    pg (0.18.4-x86-mingw32)
     puma (3.6.0)
     rack (2.0.1)
     rack-cors (0.4.0)
@@ -176,6 +177,7 @@ DEPENDENCIES
   carrierwave (>= 1.0.0.beta)
   knock
   mini_magick
+  pg
   puma (~> 3.0)
   rack-cors
   rails (~> 5.0.0, >= 5.0.0.1)
