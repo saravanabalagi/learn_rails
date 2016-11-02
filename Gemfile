@@ -12,12 +12,7 @@ gem 'rolify'
 gem 'cancancan'
 
 # Database
-group :development, :test do
-  gem 'sqlite3'
-end
-group :production do
-  gem 'pg'
-end
+gem 'pg'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Admin Panel
