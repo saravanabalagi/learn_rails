@@ -8,20 +8,29 @@
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/development.sqlite3</jdbc-url>
     </data-source>
     <data-source source="LOCAL" name="Rails learn_rails: development" uuid="fc117712-e20b-4f7d-aa66-38985231f41b">
-      <driver-ref>sqlite.xerial</driver-ref>
+      <driver-ref>2deab77d-5801-4b7a-aa0e-979a8e61d06a</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <remarks>$PROJECT_DIR$/config/database.yml</remarks>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:E:\Ruby\projects\learn_rails\db\development.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:postgresql:learn_rails_development</jdbc-url>
+      <explain-plan-config>
+        <provider>com.intellij.database.plan.postgres.PostgresExplainPlanProvider</provider>
+      </explain-plan-config>
       <libraries>
         <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/sqlite-jdbc-3.8.11.2.jar</url>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/postgresql-driver-license.txt</url>
         </library>
         <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/xerial-sqlite-license.txt</url>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/postgresql-9.4-1201.jdbc4.jar</url>
         </library>
       </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="PostgreSQL - postgres@localhost" uuid="6ab7757d-6449-4b3e-933c-e5bf33406663">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
     </data-source>
   </component>
 </project>
