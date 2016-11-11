@@ -18,6 +18,13 @@ class FacebookService
     Koala::Facebook::API.new(access_token).get_object('me', fields: 'name,first_name,last_name,email') if valid_token?(access_token)
   end
 
+  def self.fetch_uid(access_token)
+    if FacebookService.valid_token?(access_token)
+      data = FacebookService.fetch_data(access_token)
+      data['id']
+    end
+  end
+
   def self.app_access_token_info
     @app_access_token ||= Koala::Facebook::OAuth.new.get_app_access_token_info
   end

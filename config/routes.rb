@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   post '/auth/facebook' => 'auth_facebook#create'
   post '/auth/facebook/fetch_details' => 'auth_facebook#fetch_details'
 
+  # Resources
   resources :locations, :users
+
 end
