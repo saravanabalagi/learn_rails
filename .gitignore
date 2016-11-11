@@ -21,7 +21,10 @@
 .byebug_history
 
 # Ignore idea files
-/.idea/
+/.idea
 
 # Ignore Gemfile.lock
 /Gemfile.lock
+
+# Ignore App Env Vars
+/config/app_environment_variables.rb
