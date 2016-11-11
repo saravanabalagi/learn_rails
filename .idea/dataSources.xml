@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Sqlite (Xerial) - development.sqlite3" uuid="13b71048-0d9a-4d61-af5c-4d1ca182ba1c">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/development.sqlite3</jdbc-url>
-    </data-source>
     <data-source source="LOCAL" name="Rails learn_rails: development" uuid="fc117712-e20b-4f7d-aa66-38985231f41b">
       <driver-ref>2deab77d-5801-4b7a-aa0e-979a8e61d06a</driver-ref>
       <synchronize>true</synchronize>
@@ -31,6 +25,22 @@
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Rails learn_rails: production" uuid="e80fe35a-3ce9-462a-969a-07984e15f1ff">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:learn_rails_production</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Rails learn_rails: test" uuid="2e46e473-a88a-49bc-82a7-25a0c5f1cb31">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:learn_rails_test</jdbc-url>
     </data-source>
   </component>
 </project>
