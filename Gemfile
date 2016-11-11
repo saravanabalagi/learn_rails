@@ -17,7 +17,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Admin Panel
 gem 'rails_admin_clone'
-gem 'rails_admin', '~> 1.0.0'
+gem 'rails_admin', '~> 1.1.0'
 
 # Image Processor
 gem 'mini_magick'
