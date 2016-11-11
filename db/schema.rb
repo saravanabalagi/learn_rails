@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026175339) do
+ActiveRecord::Schema.define(version: 20161110171113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -223,8 +223,9 @@ ActiveRecord::Schema.define(version: 20161026175339) do
     t.integer  "purchasable_id"
     t.integer  "order_id"
     t.integer  "quantity"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "ordered",          default: "{}", null: false
     t.index ["order_id"], name: "index_order_items_on_order_id", using: :btree
     t.index ["purchasable_type", "purchasable_id"], name: "index_order_items_on_purchasable_type_and_purchasable_id", using: :btree
   end
@@ -365,34 +366,4 @@ ActiveRecord::Schema.define(version: 20161026175339) do
     t.index ["variant_category_id"], name: "index_variants_on_variant_category_id", using: :btree
   end
 
-  add_foreign_key "add_on_links", "add_on_type_links"
-  add_foreign_key "add_on_links", "add_ons"
-  add_foreign_key "add_on_type_links", "add_on_types"
-  add_foreign_key "add_ons", "add_on_types"
-  add_foreign_key "addresses", "locations"
-  add_foreign_key "addresses", "users"
-  add_foreign_key "coupons", "users"
-  add_foreign_key "dish_variants", "dishes"
-  add_foreign_key "dish_variants", "food_labels"
-  add_foreign_key "dish_variants", "variants"
-  add_foreign_key "dishes", "dish_categories"
-  add_foreign_key "dishes", "restaurants"
-  add_foreign_key "feel_links", "feels"
-  add_foreign_key "feels", "feel_categories"
-  add_foreign_key "locations", "cities"
-  add_foreign_key "locations", "packaging_centres"
-  add_foreign_key "order_items", "orders"
-  add_foreign_key "orders", "addresses"
-  add_foreign_key "orders", "coupons"
-  add_foreign_key "orders", "order_statuses"
-  add_foreign_key "orders", "payment_methods"
-  add_foreign_key "orders", "users"
-  add_foreign_key "ratings", "dishes"
-  add_foreign_key "ratings", "users"
-  add_foreign_key "restaurant_phones", "phone_types"
-  add_foreign_key "restaurant_phones", "restaurants"
-  add_foreign_key "restaurant_timings", "restaurants"
-  add_foreign_key "restaurants", "brands"
-  add_foreign_key "restaurants", "locations"
-  add_foreign_key "variants", "variant_categories"
 end
