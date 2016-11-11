@@ -4,8 +4,10 @@ class DishVariant < ApplicationRecord
   belongs_to :variant
   has_many :add_on_type_links, as: :addonable
   has_many :feel_links, as: :feelable
+  has_many :order_items, as: :purchasable
 
-  # validates_presence_of :dish, :variant
+  # validates_presence_of :dish
+  validates_presence_of :variant
   validates_presence_of :price
 
   after_initialize :defaults, unless: :persisted?

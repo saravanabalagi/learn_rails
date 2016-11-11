@@ -8,7 +8,7 @@ class Order < ApplicationRecord
   validates_presence_of :user, :order_status, :address, :payment_method
   # validates_presence_of :sub_total, :delivery, :vat, :total
 
-  before_save :updateSubTotal, :updateVat, :updateDelivery, :updateTotal
+  after_create :updateTotal
 
   include ActionView::Helpers::DateHelper
   def name
@@ -17,11 +17,20 @@ class Order < ApplicationRecord
     end
   end
 
+  def updateTotal
+    updateSubTotal
+    updateVat
+    updateDelivery
+    self.total = self.sub_total + self.vat + self.delivery
+    self.save
+  end
+
   private
+
   def updateSubTotal
     self.sub_total = 0
     self.order_items.each do |order_item|
-      self.sub_total += order_item.purchasable.total
+      self.sub_total += order_item.price
     end
   end
 
@@ -30,11 +39,7 @@ class Order < ApplicationRecord
   end
 
   def updateDelivery
-    self.delivery = (self.subtotal < 200) ? 30 : 40
-  end
-
-  def updateTotal
-    self.total = self.sub_total + self.vat + self.delivery
+    self.delivery = (self.sub_total < 200) ? 30 : 40
   end
 
 end

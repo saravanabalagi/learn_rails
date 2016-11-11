@@ -3,7 +3,7 @@ class Dish < ApplicationRecord
   belongs_to :dish_category
   has_many :dish_variants
   has_many :coupons, as: :couponable
-  has_many :order_items, as: :purchasable
+  has_many :order_items, through: :dish_variants
   has_many :feel_links, as: :feelable
   has_and_belongs_to_many :cuisines
   has_and_belongs_to_many :combos
@@ -14,7 +14,7 @@ class Dish < ApplicationRecord
   validates_presence_of :name
 
   def price
-    price = 0
+    self.dish_variants.maximum(:price)
   end
 
   rails_admin do
