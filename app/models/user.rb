@@ -4,11 +4,11 @@ class User < ApplicationRecord
 
   before_create :randomize_id, :titleize_name
 
-  validates :password, length: { minimum: 8 }, allow_nil: false
+  validates :password, length: { minimum: 8 }, allow_nil: true, on: :create
   validates :email, format: { with: /\A.+@.+$\Z/ }
   validates :mobile, length: { is: 10 }
 
-  validates_presence_of :name, :email, :mobile, :password
+  validates_presence_of :name, :email, :mobile
   validates_uniqueness_of :mobile, :email
 
   has_many :addresses
