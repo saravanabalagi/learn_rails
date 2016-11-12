@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   post '/auth/facebook' => 'auth_facebook#create'
   post '/auth/facebook/fetch_details' => 'auth_facebook#fetch_details'
 
+  # Verification
+  get '/auth/verify' => 'verify_user#get_otp'
+  post '/auth/verify' => 'verify_user#verify_otp'
+
   # Resources
   resources :locations, :users
 
