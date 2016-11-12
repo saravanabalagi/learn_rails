@@ -3,7 +3,9 @@ class VerifyUserController < ApplicationController
   before_action :authenticate_user, :set_user
   # POST /auth/get_otp
   def get_otp
-    if MessagingService.send_otp? @user
+    if @user.verified_at.present?
+      render status: :conflict, json: { error: 'already verified' }
+    elsif MessagingService.send_otp? @user
       render status: :ok, json: {status: 'otp_sent'}
     else
       render status: :service_unavailable, json: @user.errors
@@ -12,7 +14,9 @@ class VerifyUserController < ApplicationController
 
   # POST /auth/verify_otp
   def verify_otp
-    if MessagingService.verify_otp? @user, otp_params[:otp]
+    if @user.verified_at.present?
+      render status: :conflict, json: { error: 'already verified' }
+    elsif MessagingService.verify_otp? @user, otp_params[:otp]
       render status: :ok, json: {status: 'verification_successful'}
     else
       render status: :unprocessable_entity, json: @user.errors
