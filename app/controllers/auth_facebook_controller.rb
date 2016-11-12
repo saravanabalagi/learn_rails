@@ -1,11 +1,9 @@
 class AuthFacebookController < ApplicationController
 
-  # before_action :authenticate
-
   def create
     if FacebookService.valid_token?(auth_params[:access_token])
       data = FacebookService.fetch_data(auth_params[:access_token])
-      @user = User.find_by(uid: data['id'])
+      @user = User.find_by(uid: data['id'], provider: 'facebook')
       if @user.nil?
         name = data['first_name'] + ' ' + data['last_name']
         email = data['email']
