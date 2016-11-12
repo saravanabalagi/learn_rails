@@ -6,9 +6,9 @@ class FacebookService
       # We need to check if the access_token is valid for our FB APP. Source: https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow#checktoken
       debug_token = Koala::Facebook::API.new(access_token).debug_token(app_access_token_info['access_token'])
       status = true if debug_token['data']['is_valid']
-    rescue Exception => exception
-        print 'Exception Thrown: '
-        print exception
+    rescue => exception
+        puts 'Exception thrown during facebook valid_token?: ' + exception.class.name
+        puts exception
     ensure
       return status
     end
