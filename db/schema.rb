@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114141052) do
+ActiveRecord::Schema.define(version: 20161114163241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,7 +108,6 @@ ActiveRecord::Schema.define(version: 20161114141052) do
   create_table "coupons", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.integer  "coupon_category_id"
     t.decimal  "amount"
     t.decimal  "percentage"
     t.boolean  "affects_vat"
@@ -123,6 +122,7 @@ ActiveRecord::Schema.define(version: 20161114141052) do
     t.integer  "applied_on_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "coupon_category_id"
     t.index ["applied_on_type", "applied_on_id"], name: "index_coupons_on_applied_on_type_and_applied_on_id", using: :btree
     t.index ["coupon_category_id"], name: "index_coupons_on_coupon_category_id", using: :btree
     t.index ["name"], name: "index_coupons_on_name", unique: true, using: :btree

@@ -3,7 +3,6 @@ class CreateCoupons < ActiveRecord::Migration[5.0]
     create_table :coupons do |t|
       t.string :name
       t.string :description
-      t.belongs_to :coupon_category, foreign_key: true
       t.decimal :amount
       t.decimal :percentage
       t.boolean :affects_vat

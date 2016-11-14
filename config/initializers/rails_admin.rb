@@ -50,4 +50,8 @@ RailsAdmin.config do |config|
     visible false
   end
 
+  config.model 'CouponCategory' do
+    visible false
+  end
+
 end
