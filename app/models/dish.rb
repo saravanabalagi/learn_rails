@@ -10,6 +10,9 @@ class Dish < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
+  accepts_nested_attributes_for :dish_variants, allow_destroy: true
+  accepts_nested_attributes_for :feel_links, allow_destroy: true
+
   validates_presence_of :restaurant, :dish_category
   validates_presence_of :name
 
@@ -36,6 +39,17 @@ class Dish < ApplicationRecord
         end
       end
       configure :image do
+        hide
+      end
+    end
+    edit do
+      configure :coupons do
+        hide
+      end
+      configure :order_items do
+        hide
+      end
+      configure :combos do
         hide
       end
     end

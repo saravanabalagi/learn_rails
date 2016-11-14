@@ -6,6 +6,8 @@ class AddOnLink < ApplicationRecord
   validates_presence_of :price
   validates_uniqueness_of :add_on, scope: :add_on_type_link
 
+  accepts_nested_attributes_for :feel_links, allow_destroy: true
+
   def name
     if self.add_on.present? && self.add_on_type_link.present?
       self.add_on_type_link.name + ' ' + self.add_on.name

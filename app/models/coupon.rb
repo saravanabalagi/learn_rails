@@ -6,4 +6,12 @@ class Coupon < ApplicationRecord
   validates_presence_of :user
   validates_presence_of :name, :description, :available, :affects_surcharges, :expiry
   validates_uniqueness_of :name
+
+  rails_admin do
+    edit do
+      configure :orders do
+        hide
+      end
+    end
+  end
 end

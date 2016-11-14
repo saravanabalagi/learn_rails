@@ -12,6 +12,9 @@ class DishVariant < ApplicationRecord
 
   after_initialize :defaults, unless: :persisted?
 
+  accepts_nested_attributes_for :feel_links, allow_destroy: true
+  accepts_nested_attributes_for :add_on_type_links, allow_destroy: true
+
   def name
     if self.price.present? && self.variant.present? && self.dish.present? && self.dish.name.present?
       self.dish.name + ': ' + self.variant.name + ' (' + self.price.to_s + ')'
@@ -22,6 +25,14 @@ class DishVariant < ApplicationRecord
   def defaults
     self.food_label ||= FoodLabel.find_by_name('Veg')
     self.variant ||= Variant.find_by_name('Default')
+  end
+
+  rails_admin do
+    edit do
+      configure :order_items do
+        hide
+      end
+    end
   end
 
 end

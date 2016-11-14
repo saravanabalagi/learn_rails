@@ -9,4 +9,8 @@ class Restaurant < ApplicationRecord
   validates_presence_of :location
   validates_presence_of :name, :address_line1, :address_line2
 
+  accepts_nested_attributes_for :dishes, allow_destroy: true
+  accepts_nested_attributes_for :restaurant_phones, allow_destroy: true
+  accepts_nested_attributes_for :restaurant_timings, allow_destroy: true
+
 end

@@ -13,4 +13,15 @@ class Combo < ApplicationRecord
     end
     price
   end
+
+  rails_admin do
+    edit do
+      configure :coupons do
+        hide
+      end
+      configure :order_items do
+        hide
+      end
+    end
+  end
 end

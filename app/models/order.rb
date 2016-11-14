@@ -10,6 +10,8 @@ class Order < ApplicationRecord
 
   after_create :updateTotal
 
+  accepts_nested_attributes_for :order_items, allow_destroy: true
+
   include ActionView::Helpers::DateHelper
   def name
     if self.total.present? && self.created_at.present?
