@@ -3,7 +3,8 @@ class Location < ApplicationRecord
   belongs_to :city
   has_many :addresses
   has_many :restaurants
-  has_many :coupons, as: :couponable
+  has_many :coupons, as: :usable_by
+  has_many :coupons, as: :applied_on
 
   validates_presence_of :city, :packaging_centre
   validates_presence_of :name

@@ -1,5 +1,5 @@
 class Brand < ApplicationRecord
-  has_many :coupons, as: :couponable
+  has_many :coupons, as: :applied_on
   has_many :restaurants
 
   validates_presence_of :name

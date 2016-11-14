@@ -2,7 +2,7 @@ class Dish < ApplicationRecord
   belongs_to :restaurant
   belongs_to :dish_category
   has_many :dish_variants
-  has_many :coupons, as: :couponable
+  has_many :coupons, as: :applied_on
   has_many :order_items, through: :dish_variants
   has_many :feel_links, as: :feelable
   has_and_belongs_to_many :cuisines
