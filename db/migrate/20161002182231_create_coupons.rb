@@ -4,7 +4,6 @@ class CreateCoupons < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :description
       t.integer :available
-      t.integer :used
       t.belongs_to :user, foreign_key: true
       t.boolean :affects_surcharges
       t.decimal :amount
