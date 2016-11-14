@@ -3,15 +3,17 @@ class CreateCoupons < ActiveRecord::Migration[5.0]
     create_table :coupons do |t|
       t.string :name
       t.string :description
-      t.integer :available
-      t.belongs_to :user, foreign_key: true
-      t.boolean :affects_surcharges
+      t.belongs_to :coupon_category, foreign_key: true
       t.decimal :amount
-      t.decimal :min_cart_value
       t.decimal :percentage
+      t.boolean :affects_vat
+      t.boolean :affects_delivery
       t.decimal :max_amount
+      t.decimal :min_cart_value
+      t.integer :available
       t.datetime :expiry
-      t.belongs_to :couponable, polymorphic: true
+      t.belongs_to :usable_by, polymorphic: true
+      t.belongs_to :applied_on, polymorphic: true
 
       t.timestamps
     end

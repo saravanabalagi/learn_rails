@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114130534) do
+ActiveRecord::Schema.define(version: 20161114141052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,24 +98,35 @@ ActiveRecord::Schema.define(version: 20161114130534) do
     t.index ["dish_id", "combo_id"], name: "index_combos_dishes_on_dish_id_and_combo_id", using: :btree
   end
 
+  create_table "coupon_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_coupon_categories_on_name", unique: true, using: :btree
+  end
+
   create_table "coupons", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.integer  "available"
-    t.integer  "user_id"
-    t.boolean  "affects_surcharges"
+    t.integer  "coupon_category_id"
     t.decimal  "amount"
-    t.decimal  "min_cart_value"
     t.decimal  "percentage"
+    t.boolean  "affects_vat"
+    t.boolean  "affects_delivery"
     t.decimal  "max_amount"
+    t.decimal  "min_cart_value"
+    t.integer  "available"
     t.datetime "expiry"
-    t.string   "couponable_type"
-    t.integer  "couponable_id"
+    t.string   "usable_by_type"
+    t.integer  "usable_by_id"
+    t.string   "applied_on_type"
+    t.integer  "applied_on_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.index ["couponable_type", "couponable_id"], name: "index_coupons_on_couponable_type_and_couponable_id", using: :btree
+    t.index ["applied_on_type", "applied_on_id"], name: "index_coupons_on_applied_on_type_and_applied_on_id", using: :btree
+    t.index ["coupon_category_id"], name: "index_coupons_on_coupon_category_id", using: :btree
     t.index ["name"], name: "index_coupons_on_name", unique: true, using: :btree
-    t.index ["user_id"], name: "index_coupons_on_user_id", using: :btree
+    t.index ["usable_by_type", "usable_by_id"], name: "index_coupons_on_usable_by_type_and_usable_by_id", using: :btree
   end
 
   create_table "cuisines", force: :cascade do |t|
@@ -371,4 +382,5 @@ ActiveRecord::Schema.define(version: 20161114130534) do
     t.index ["variant_category_id"], name: "index_variants_on_variant_category_id", using: :btree
   end
 
+  add_foreign_key "coupons", "coupon_categories"
 end
