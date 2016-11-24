@@ -12,7 +12,34 @@ Rails.application.routes.draw do
   get '/auth/verify' => 'verify_user#get_otp'
   post '/auth/verify' => 'verify_user#verify_otp'
 
-  # Resources
-  resources :locations, :users
+
+  # Addresses
+  resource :addresses
+
+  # Cart
+  get '/cart' => 'orders#cart'
+
+  # Cities
+  get 'cities' => 'cities#index'
+  get 'cities/:id' => 'cities#show'
+
+  # Combos
+  get 'combos' => 'combos#index'
+  get 'combos/:id' => 'combos#show'
+
+  # Dishes
+  get 'dishes' => 'dishes#index'
+  get 'dishes/:id' => 'dishes#show'
+
+  # Locations
+  get 'locations' => 'locations#index'
+  get 'locations/:id' => 'locations#show'
+
+  # Orders
+  get 'orders' => 'orders#index'
+  get 'orders/:id' => 'orders#show'
+
+  # Users
+  resources :users
 
 end
