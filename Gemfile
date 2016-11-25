@@ -7,6 +7,7 @@ gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 # Authentication
 gem 'knock'
 gem 'koala'
+gem 'bcrypt', platforms: :ruby
 
 # HTTP Requests
 gem 'faraday', '~> 0.10.0'
@@ -26,6 +27,10 @@ gem 'rails_admin', '~> 1.1.0'
 # Image Processor
 gem 'mini_magick'
 gem 'carrierwave', '>= 1.0.0.beta'
+
+# JSON Handling
+gem 'rabl'
+gem 'oj'
 
 # Web Server
 gem 'puma', '~> 3.0'
