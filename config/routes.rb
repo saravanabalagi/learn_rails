@@ -27,6 +27,10 @@ Rails.application.routes.draw do
   get 'combos' => 'combos#index'
   get 'combos/:id' => 'combos#show'
 
+  # DishCategories
+  get 'dish_categories' => 'dish_categories#index'
+  get 'dish_categories/:id' => 'dish_categories#show'
+
   # Dishes
   get 'dishes' => 'dishes#index'
   get 'dishes/:id' => 'dishes#show'
