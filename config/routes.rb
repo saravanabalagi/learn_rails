@@ -43,6 +43,8 @@ Rails.application.routes.draw do
   get 'orders/:id' => 'orders#show'
 
   # Users
-  resources :users
+  get 'users/me' => 'users#me'
+  post 'users/create' => 'users#create'
+  patch 'users/me' => 'users#me'
 
 end

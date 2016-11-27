@@ -5,7 +5,7 @@ class User < ApplicationRecord
   before_create :randomize_id, :titleize_name
   after_create :assign_default_role
 
-  validates :password, length: { minimum: 8 }, allow_nil: true, on: :create
+  validates :password, length: { minimum: 8 }, allow_nil: true, on: :create, unless: (:uid.present? && :provider.present?)
   validates :email, format: { with: /\A.+@.+$\Z/ }
   validates :mobile, length: { is: 10 }
 

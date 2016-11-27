@@ -1,21 +1,20 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, except: :create
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_me, only: [:me, :update]
+  # before_action :set_user, only: [:show]
   load_and_authorize_resource
 
-  # GET /users
-  def index
-    @users = User.all
-
-    render json: @users
+  # GET /users/me
+  def me
+    render json: @me
   end
 
   # GET /users/1
-  def show
-    render json: @user
-  end
+  # def show
+  #   render json: @user, only: [:name]
+  # end
 
-  # POST /users
+  # POST /users/create
   def create
     @user = User.new(user_params)
     if @user.save
@@ -26,7 +25,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1
+  # PATCH/PUT /users/me
   def update
     if @user.update(user_params)
       set_uid_and_provider
@@ -36,15 +35,14 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  def destroy
-    @user.destroy
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def set_me
+      @me = current_user
     end
 
     def set_uid_and_provider
