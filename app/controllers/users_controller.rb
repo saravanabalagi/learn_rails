@@ -46,12 +46,12 @@ class UsersController < ApplicationController
     end
 
     def set_uid_and_provider
-      if auth_params[:access_token].present? && auth_params[:provider].present?
-        if auth_params[:provider] == 'facebook'
-          uid = FacebookService.fetch_uid(auth_params[:access_token])
+      if oauth_params[:access_token].present? && oauth_params[:provider].present?
+        if oauth_params[:provider] == 'facebook'
+          uid = FacebookService.fetch_uid(oauth_params[:access_token])
           if uid.present?
             @user.uid = uid
-            @user.provider = auth_params[:provider]
+            @user.provider = oauth_params[:provider]
             @user.save
           end
         end
@@ -63,8 +63,8 @@ class UsersController < ApplicationController
       params.fetch(:user, {}).permit(:name, :mobile, :email, :password)
     end
 
-    def auth_params
-      params.fetch(:auth, {}).permit(:access_token, :provider)
+    def oauth_params
+      params.fetch(:oauth, {}).permit(:access_token, :provider)
     end
 
 end
