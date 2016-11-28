@@ -28,10 +28,6 @@ gem 'rails_admin', '~> 1.1.0'
 gem 'mini_magick'
 gem 'carrierwave', '>= 1.0.0.beta'
 
-# JSON Handling
-gem 'rabl'
-gem 'oj'
-
 # Web Server
 gem 'puma', '~> 3.0'
 gem 'rack-cors'

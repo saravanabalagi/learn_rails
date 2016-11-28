@@ -17,7 +17,7 @@ class Dish < ApplicationRecord
   validates_presence_of :name
 
   def price
-    self.dish_variants.maximum(:price)
+    self.dish_variants.minimum(:price)
   end
 
   rails_admin do

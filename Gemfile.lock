@@ -102,12 +102,9 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.6.8.1-x86-mingw32)
       mini_portile2 (~> 2.1.0)
-    oj (2.17.5)
     pg (0.19.0-x86-mingw32)
     public_suffix (2.0.4)
     puma (3.6.0)
-    rabl (0.13.1)
-      activesupport (>= 2.3.14)
     rack (2.0.1)
     rack-cors (0.4.0)
     rack-pjax (1.0.0)
@@ -193,10 +190,8 @@ DEPENDENCIES
   knock
   koala
   mini_magick
-  oj
   pg
   puma (~> 3.0)
-  rabl
   rack-cors
   rails (~> 5.0.0, >= 5.0.0.1)
   rails_admin (~> 1.1.0)
