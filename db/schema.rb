@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114163241) do
+ActiveRecord::Schema.define(version: 20161128160433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -259,9 +259,11 @@ ActiveRecord::Schema.define(version: 20161114163241) do
     t.integer  "payment_method_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.datetime "ordered_at"
     t.index ["address_id"], name: "index_orders_on_address_id", using: :btree
     t.index ["coupon_id"], name: "index_orders_on_coupon_id", using: :btree
     t.index ["order_status_id"], name: "index_orders_on_order_status_id", using: :btree
+    t.index ["ordered_at"], name: "index_orders_on_ordered_at", using: :btree
     t.index ["payment_method_id"], name: "index_orders_on_payment_method_id", using: :btree
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
