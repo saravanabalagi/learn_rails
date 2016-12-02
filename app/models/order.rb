@@ -5,10 +5,10 @@ class Order < ApplicationRecord
   belongs_to :payment_method
   has_many :order_items
 
-  validates_presence_of :user, :order_status, :address, :payment_method
+  validates_presence_of :user
   # validates_presence_of :sub_total, :delivery, :vat, :total
 
-  after_create :updateTotal
+  before_create :setOrderStatus
 
   accepts_nested_attributes_for :order_items, allow_destroy: true
 
@@ -17,6 +17,16 @@ class Order < ApplicationRecord
     if self.total.present? && self.created_at.present?
       'Rs. ' + self.total.to_s + ' (' + time_ago_in_words(self.created_at) + ' ago)'
     end
+  end
+
+  def setOrderStatus
+    self.order_status = OrderStatus.find_by(name: 'Initiated')
+  end
+
+  #TODO update ordered_at when order_status changes
+  def updateTime
+    self.ordered_at = DateTime.now
+    self.save
   end
 
   def updateTotal
