@@ -14,10 +14,12 @@ Rails.application.routes.draw do
 
 
   # Addresses
-  resource :addresses
+  resources :addresses
 
   # Cart
   get '/cart' => 'orders#cart'
+  post '/cart' => 'orders#order_items'
+  post '/cart/set_address' => 'orders#set_address'
 
   # Cities
   get 'cities' => 'cities#index'

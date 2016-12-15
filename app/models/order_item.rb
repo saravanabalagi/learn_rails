@@ -3,7 +3,7 @@ class OrderItem < ApplicationRecord
   belongs_to :order
 
   after_commit do
-    self.order.updateTotal
+    self.order.reload.updateTotal
   end
 
   validates_presence_of :order
