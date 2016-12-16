@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get '/cart' => 'orders#cart'
   post '/cart' => 'orders#order_items'
   post '/cart/set_address' => 'orders#set_address'
+  post '/cart/purchase/cod' => 'orders#purchase_cod'
 
   # Cities
   get 'cities' => 'cities#index'

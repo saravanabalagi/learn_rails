@@ -11,11 +11,18 @@ class OrdersController < ApplicationController
   # GET /orders/1
   def show
     @order = @orders.find(params[:id])
-    render json: @order, include: [:order_status, :address, :payment_method]
+    render json: @order, include: [:order_status, :payment_method,
+                                   address: { include: { location: { include: :city} }, only: [:name, :line1, :line2, :mobile]}]
   end
 
   # GET /cart
   def cart
+    render json: @cart
+  end
+
+  # POST /cart/purchase/cod
+  def purchase_cod
+    @cart.purchase_by_cod
     render json: @cart
   end
 
@@ -24,7 +31,7 @@ class OrdersController < ApplicationController
     params.require(:address_id)
     @cart.address_id = params[:address_id]
     if @cart.save
-      render json: @cart
+      render json: @cart, only: [:delivery, :total, :sub_total, :vat, :id]
     else
       render json: @cart.errors, status: :unprocessable_entity
     end

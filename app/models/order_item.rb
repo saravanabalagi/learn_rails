@@ -3,7 +3,7 @@ class OrderItem < ApplicationRecord
   belongs_to :order
 
   after_commit do
-    self.order.reload.updateTotal
+    self.order.reload.update_total
   end
 
   validates_presence_of :order
@@ -28,7 +28,7 @@ class OrderItem < ApplicationRecord
       json && json.has_key?('add_ons') && json['add_ons'].each do |add_on|
         price += AddOnLink.find(add_on).price
       end
-      return price
+      price * self.quantity
     elsif self.purchasable_type == 'Combo'
       price = 0
       json['dish_variants'].each do |dish_variant|
@@ -38,7 +38,7 @@ class OrderItem < ApplicationRecord
         end
       end
       price -= self.purchasable.discount
-      return price
+      price * self.quantity
     end
   end
 
