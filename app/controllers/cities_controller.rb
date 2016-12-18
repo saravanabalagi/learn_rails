@@ -6,9 +6,9 @@ class CitiesController < ApplicationController
     render json: @cities
   end
 
-  # GET /cities/1
-  def show
-    @city = City.find(params[:id])
-    render json: @city, include: :locations
+  # GET /cities/1/locations
+  def locations
+    @locations = City.find(params[:id]).locations
+    render json: @locations
   end
 end

@@ -7,6 +7,8 @@ class Restaurant < ApplicationRecord
   has_and_belongs_to_many :cuisines
   has_many :coupons, as: :applied_on
 
+  has_one :packaging_centre, through: :location
+
   validates_presence_of :location
   validates_presence_of :name, :address_line1, :address_line2
 

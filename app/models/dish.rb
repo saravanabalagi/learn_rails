@@ -8,6 +8,8 @@ class Dish < ApplicationRecord
   has_and_belongs_to_many :cuisines
   has_and_belongs_to_many :combos
 
+  has_one :packaging_centre, through: :restaurant
+
   mount_uploader :image, ImageUploader
 
   accepts_nested_attributes_for :dish_variants, allow_destroy: true
