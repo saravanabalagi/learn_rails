@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get '/auth/verify' => 'verify_user#get_otp'
   post '/auth/verify' => 'verify_user#verify_otp'
 
+  # AddOns
+  get 'add_ons/:id' => 'add_ons#show'
 
   # Addresses
   resources :addresses
