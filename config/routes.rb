@@ -45,6 +45,9 @@ Rails.application.routes.draw do
   # Variants
   get 'variants/:id' => 'variants#show'
 
+  # VariantCategories
+  get 'variant_categories/:id' => 'variant_categories#show'
+
   # Orders
   get 'orders' => 'orders#index'
   get 'orders/:id' => 'orders#show'
