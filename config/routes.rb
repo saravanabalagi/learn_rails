@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   # AddOns
   get 'add_ons/:id' => 'add_ons#show'
 
+  # AddOnLinks
+  get 'add_on_links/:id' => 'add_on_links#show'
+
   # AddOnTypes
   get 'add_on_types/:id' => 'add_on_types#show'
 
