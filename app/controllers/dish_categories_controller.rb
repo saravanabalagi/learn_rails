@@ -1,15 +1,15 @@
 class DishCategoriesController < ApplicationController
-  before_action :set_packaging_centre
+  before_action :set_location
 
   # GET /dish_categories
   def index
-    @dish_categories = @packaging_centre.dish_categories
+    @dish_categories = @location.dish_categories
     render json: @dish_categories
   end
 
   # GET /dish_categories/1/dishes
   def dishes
-    @dishes = @packaging_centre.dishes
+    @dishes = @location.dishes
                       .joins(:dish_category)
                       .where('dish_categories.id':params[:id])
     if @dishes.length > 0
@@ -23,8 +23,8 @@ class DishCategoriesController < ApplicationController
   end
 
   private
-  def set_packaging_centre
-    @packaging_centre = Location.find(request.headers['Location']).packaging_centre
+  def set_location
+    @location = Location.find(request.headers['Location'])
   end
 
 end

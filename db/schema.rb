@@ -219,13 +219,11 @@ ActiveRecord::Schema.define(version: 20161128160433) do
 
   create_table "locations", force: :cascade do |t|
     t.string   "name"
-    t.integer  "packaging_centre_id"
     t.integer  "city_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_locations_on_city_id", using: :btree
     t.index ["name"], name: "index_locations_on_name", unique: true, using: :btree
-    t.index ["packaging_centre_id"], name: "index_locations_on_packaging_centre_id", using: :btree
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -266,13 +264,6 @@ ActiveRecord::Schema.define(version: 20161128160433) do
     t.index ["ordered_at"], name: "index_orders_on_ordered_at", using: :btree
     t.index ["payment_method_id"], name: "index_orders_on_payment_method_id", using: :btree
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
-  end
-
-  create_table "packaging_centres", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_packaging_centres_on_name", unique: true, using: :btree
   end
 
   create_table "payment_methods", force: :cascade do |t|

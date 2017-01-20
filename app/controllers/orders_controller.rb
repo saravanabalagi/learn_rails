@@ -29,8 +29,8 @@ class OrdersController < ApplicationController
   # GET /cart/set_address
   def set_address
     params.require(:address_id)
-    allowed_locations = Location.find(request.headers['Location']).packaging_centre.locations
-    if allowed_locations.find(params[:address_id])
+    location = Location.find(request.headers['Location'])
+    if location.find(params[:address_id])
       @cart.address_id = params[:address_id]
       if @cart.save
         render json: @cart, only: [:delivery, :total, :sub_total, :vat, :id]

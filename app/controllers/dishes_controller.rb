@@ -68,7 +68,7 @@ class DishesController < ApplicationController
 
   private
   def set_dishes
-    @dishes = Location.find(request.headers['Location']).packaging_centre.dishes
+    @dishes = Location.find(request.headers['Location']).dishes
   end
 
 end

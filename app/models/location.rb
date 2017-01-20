@@ -1,12 +1,13 @@
 class Location < ApplicationRecord
-  belongs_to :packaging_centre
   belongs_to :city
   has_many :addresses
   has_many :restaurants
+  has_many :dishes, through: :restaurants
+  has_many :dish_categories, -> { distinct }, through: :dishes
   has_many :coupons, as: :usable_by
   has_many :coupons, as: :applied_on
 
-  validates_presence_of :city, :packaging_centre
+  validates_presence_of :city
   validates_presence_of :name
   validates_uniqueness_of :name
 
