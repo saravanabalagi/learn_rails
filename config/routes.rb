@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   # AddOnTypes
   get 'add_on_types/:id' => 'add_on_types#show'
 
+  # AddOnTypeLinks
+  get 'add_on_type_links/:id' => 'add_on_type_links#show'
+
   # Addresses
   resources :addresses
 
