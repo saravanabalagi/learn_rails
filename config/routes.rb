@@ -42,6 +42,9 @@ Rails.application.routes.draw do
   # DishVariants
   get 'dish_variants/:id' => 'dish_variants#show'
 
+  # Restaurants
+  get 'restaurants/:id' => 'restaurants#show'
+
   # Variants
   get 'variants/:id' => 'variants#show'
 
