@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'dish_variant/show'
+
   # Admin Panel
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
@@ -36,6 +38,9 @@ Rails.application.routes.draw do
 
   # Dishes
   get 'dishes/:id' => 'dishes#show'
+
+  # DishVariants
+  get 'dish_variants/:id' => 'dish_variants#show'
 
   # Orders
   get 'orders' => 'orders#index'
