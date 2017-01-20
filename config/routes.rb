@@ -37,9 +37,6 @@ Rails.application.routes.draw do
   # Dishes
   get 'dishes/:id' => 'dishes#show'
 
-  # Locations
-  get 'locations/:id/siblings' => 'locations#siblings'
-
   # Orders
   get 'orders' => 'orders#index'
   get 'orders/:id' => 'orders#show'
