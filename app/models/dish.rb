@@ -8,7 +8,7 @@ class Dish < ApplicationRecord
   has_and_belongs_to_many :cuisines
   has_and_belongs_to_many :combos
 
-  has_one :packaging_centre, through: :restaurant
+  has_one :location, through: :restaurant
 
   mount_uploader :image, ImageUploader
 
