@@ -12,6 +12,7 @@ class User < ApplicationRecord
   validates_presence_of :name, :email, :mobile
   validates_uniqueness_of :mobile, :email
 
+  belongs_to :location
   has_many :addresses
   has_many :orders
   has_many :coupons, as: :usable_by

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161128160433) do
+ActiveRecord::Schema.define(version: 20170123082445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -345,7 +345,9 @@ ActiveRecord::Schema.define(version: 20161128160433) do
     t.string   "uid"
     t.string   "provider"
     t.datetime "verified_at"
+    t.integer  "location_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["location_id"], name: "index_users_on_location_id", using: :btree
     t.index ["mobile"], name: "index_users_on_mobile", unique: true, using: :btree
     t.index ["provider"], name: "index_users_on_provider", using: :btree
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
@@ -376,4 +378,5 @@ ActiveRecord::Schema.define(version: 20161128160433) do
   end
 
   add_foreign_key "coupons", "coupon_categories"
+  add_foreign_key "users", "locations"
 end
