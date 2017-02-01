@@ -26,52 +26,33 @@ class OrdersController < ApplicationController
     render json: @cart
   end
 
-  # GET /cart/set_address
-  def set_address
-    params.require(:address_id)
-    location = Location.find(request.headers['Location'])
-    if location.find(params[:address_id])
-      @cart.address_id = params[:address_id]
-      if @cart.save
-        render json: @cart, only: [:delivery, :total, :sub_total, :vat, :id]
-      else
-        render json: @cart.errors, status: :unprocessable_entity
-      end
-    else
-      render status: :forbidden
-    end
-  end
-
   # POST /cart
   def order_items
     @cart.order_items.destroy_all
 
     order_params
-    order_items = {}
-    order_items[:succeeded] = []
-    order_items[:errors] = []
+    cart = {}
+    cart[:errors] = []
 
     @order_params.key?(:dish_variants) && @order_params[:dish_variants].each do |order_item_params|
       @order_item = OrderItem.new(order_item_params)
       @order_item.order = @cart
-      if @order_item.save
-        order_items[:succeeded].push @order_item
-      else
-        order_items[:errors].push @order_item.errors
+      unless @order_item.save
+        cart[:errors].push @order_item.errors
       end
     end
 
     @order_params.key?(:combos) && @order_params[:combos].each do |order_item_params|
       @order_item = OrderItem.new(order_item_params)
       @order_item.order = @cart
-      if @order_item.save
-        order_items[:succeeded].push @order_item
-      else
-        order_items[:errors].push @order_item.errors
+      unless @order_item.save
+        cart[:errors].push @order_item.errors
       end
     end
 
-    render json: order_items, status: order_items[:errors].length == 0 ? :created : :unprocessable_entity
+    cart[:cart] = @cart.order_items
+    cart[:values] = @cart.slice(:delivery, :total, :sub_total, :vat, :id)
+    render json: cart, status: cart[:errors].length == 0 ? :created : :unprocessable_entity
 
   end
 

@@ -53,19 +53,6 @@ ActiveRecord::Schema.define(version: 20170123082445) do
     t.index ["add_on_type_id"], name: "index_add_ons_on_add_on_type_id", using: :btree
   end
 
-  create_table "addresses", force: :cascade do |t|
-    t.string   "name"
-    t.string   "line1"
-    t.string   "line2"
-    t.integer  "location_id"
-    t.string   "mobile"
-    t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["location_id"], name: "index_addresses_on_location_id", using: :btree
-    t.index ["user_id"], name: "index_addresses_on_user_id", using: :btree
-  end
-
   create_table "brands", force: :cascade do |t|
     t.string   "name"
     t.string   "business_name"
@@ -248,7 +235,6 @@ ActiveRecord::Schema.define(version: 20170123082445) do
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "order_status_id"
-    t.integer  "address_id"
     t.integer  "coupon_id"
     t.decimal  "sub_total"
     t.decimal  "delivery"
@@ -258,7 +244,6 @@ ActiveRecord::Schema.define(version: 20170123082445) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.datetime "ordered_at"
-    t.index ["address_id"], name: "index_orders_on_address_id", using: :btree
     t.index ["coupon_id"], name: "index_orders_on_coupon_id", using: :btree
     t.index ["order_status_id"], name: "index_orders_on_order_status_id", using: :btree
     t.index ["ordered_at"], name: "index_orders_on_ordered_at", using: :btree
