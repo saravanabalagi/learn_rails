@@ -4,7 +4,7 @@ class AddOnTypeLinksController < ApplicationController
   def show
     @add_on_type_link = AddOnTypeLink.find(params[:id])
     if @add_on_type_link
-      render status: :ok, json: @add_on_type_link
+      render status: :ok, json: @add_on_type_link, methods: :add_on_link_ids
     else
       render status: :not_found
     end

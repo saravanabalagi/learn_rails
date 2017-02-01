@@ -45,6 +45,7 @@ Rails.application.routes.draw do
 
   # DishCategories
   get 'dish_categories' => 'dish_categories#index'
+  get 'dish_categories/:id' => 'dish_categories#show'
   get 'dish_categories/:id/dishes' => 'dish_categories#dishes'
 
   # Dishes

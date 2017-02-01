@@ -4,7 +4,13 @@ class DishCategoriesController < ApplicationController
   # GET /dish_categories
   def index
     @dish_categories = @location.dish_categories
-    render json: @dish_categories
+    render json: @dish_categories, methods: :dish_ids
+  end
+
+  # GET /dish_categories/1
+  def show
+    @dish_category = @location.dish_categories.find(params[:id])
+    render json: @dish_category, methods: :dish_ids
   end
 
   # GET /dish_categories/1/dishes
@@ -12,14 +18,7 @@ class DishCategoriesController < ApplicationController
     @dishes = @location.dishes
                       .joins(:dish_category)
                       .where('dish_categories.id':params[:id])
-    if @dishes.length > 0
-      render json: @dishes, include: { restaurant:
-                                              {only: [:id, :name, :logo]}},
-                              methods: [:price],
-                              only: [:id, :name, :image, :available]
-    else
-      render status: :not_found
-    end
+    render json: @dishes
   end
 
   private
