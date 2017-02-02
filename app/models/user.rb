@@ -13,11 +13,8 @@ class User < ApplicationRecord
   validates_uniqueness_of :mobile, :email
 
   belongs_to :location
-  has_many :addresses
   has_many :orders
   has_many :coupons, as: :usable_by
-
-  accepts_nested_attributes_for :addresses, allow_destroy: true
 
   def as_json(options={})
     options[:except] ||= [:password_digest]

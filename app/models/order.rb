@@ -1,7 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :user
   belongs_to :order_status
-  belongs_to :address
   belongs_to :payment_method
   has_many :order_items
 

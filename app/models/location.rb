@@ -1,6 +1,5 @@
 class Location < ApplicationRecord
   belongs_to :city
-  has_many :addresses
   has_many :restaurants
   has_many :dishes, through: :restaurants
   has_many :dish_categories, -> { distinct }, through: :dishes
@@ -14,9 +13,6 @@ class Location < ApplicationRecord
   accepts_nested_attributes_for :restaurants, allow_destroy: true
 
   rails_admin do
-    configure :addresses do
-      hide
-    end
     edit do
       configure :coupons do
         hide

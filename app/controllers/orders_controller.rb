@@ -11,8 +11,7 @@ class OrdersController < ApplicationController
   # GET /orders/1
   def show
     @order = @orders.find(params[:id])
-    render json: @order, include: [:order_status, :payment_method,
-                                   address: { include: { location: { include: :city} }, only: [:name, :line1, :line2, :mobile]}]
+    render json: @order, include: [:order_status, :payment_method]
   end
 
   # GET /cart
