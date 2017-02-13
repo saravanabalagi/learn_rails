@@ -5,13 +5,13 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    render json: @orders, include: :order_status, only: [:id, :total, :ordered_at]
+    render json: @orders, include: [:order_status,:payment_method,:order_items]
   end
 
   # GET /orders/1
   def show
     @order = @orders.find(params[:id])
-    render json: @order, include: [:order_status, :payment_method]
+    render json: @order, include: [:order_status, :payment_method,:order_items]
   end
 
   # GET /cart
