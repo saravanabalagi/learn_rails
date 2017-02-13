@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  purchasable: one
+  dish_variant: one
   cart: one
   quantity: 1
 
 two:
-  purchasable: two
+  dish_variant: two
   cart: two
   quantity: 1

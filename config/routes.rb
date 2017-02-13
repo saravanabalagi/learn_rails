@@ -38,10 +38,6 @@ Rails.application.routes.draw do
   get 'cities' => 'cities#index'
   get 'cities/:id/locations' => 'cities#locations'
 
-  # Combos
-  get 'combos' => 'combos#index'
-  get 'combos/:id' => 'combos#show'
-
   # DishCategories
   get 'dish_categories' => 'dish_categories#index'
   get 'dish_categories/:id' => 'dish_categories#show'

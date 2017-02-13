@@ -33,16 +33,12 @@ class OrdersController < ApplicationController
     cart = {}
     cart[:errors] = []
 
-    @order_params.key?(:dish_variants) && @order_params[:dish_variants].each do |order_item_params|
-      @order_item = OrderItem.new(order_item_params)
-      @order_item.order = @cart
-      unless @order_item.save
-        cart[:errors].push @order_item.errors
-      end
-    end
-
-    @order_params.key?(:combos) && @order_params[:combos].each do |order_item_params|
-      @order_item = OrderItem.new(order_item_params)
+    order_params[:cart_dish_variants].each do |order_item_params|
+      @order_item = OrderItem.new
+      @order_item.dish_variant = DishVariant.find(order_item_params.dish_variant_id)
+      @order_item.note = order_item_params[:note]
+      @order_item.quantity = order_item_params[:quantity]
+      order_item_params[:add_on_link_ids].each { |add_on_link_id| @order_item.add_on_links.push(AddOnLink.find(add_on_link_id)) }
       @order_item.order = @cart
       unless @order_item.save
         cart[:errors].push @order_item.errors
@@ -73,21 +69,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    @order_params = params.permit(dish_variants: [:id, :quantity, :ordered])
-    if @order_params.key?(:dish_variants) && @order_params[:dish_variants].kind_of?(Array)
-      @order_params[:dish_variants].each do |dish_variant|
-        dish_variant[:purchasable_type] = 'DishVariant'
-        dish_variant[:purchasable_id] = dish_variant[:id]
-        dish_variant.delete(:id)
-      end
-    end
-    if @order_params.key?(:combos) && @order_params[:combos].kind_of?(Array)
-      @order_params[:combos].each do |combo|
-        combo[:purchasable_type] = 'Combo'
-        combo[:purchasable_id] = combo[:id]
-        combo.delete(:id)
-      end
-    end
-    @order_params.permit(dish_variants: [:purchasable_id, :purchasable_type, :quantity, :ordered])
+    params.fetch(:cart_dish_variants, {}).permit(:dish_variant_id, :quantity, :note, :add_on_link_ids)
   end
 end

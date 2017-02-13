@@ -4,7 +4,7 @@ class DishVariant < ApplicationRecord
   belongs_to :variant
   has_many :add_on_type_links, as: :addonable
   has_many :feel_links, as: :feelable
-  has_many :order_items, as: :purchasable
+  has_many :order_items
 
   # validates_presence_of :dish
   validates_presence_of :variant

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170123082445) do
+ActiveRecord::Schema.define(version: 20170213133816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 20170123082445) do
     t.index ["add_on_id", "add_on_type_link_id"], name: "index_add_on_links_on_add_on_id_and_add_on_type_link_id", unique: true, using: :btree
     t.index ["add_on_id"], name: "index_add_on_links_on_add_on_id", using: :btree
     t.index ["add_on_type_link_id"], name: "index_add_on_links_on_add_on_type_link_id", using: :btree
+  end
+
+  create_table "add_on_links_order_items", id: false, force: :cascade do |t|
+    t.integer "add_on_link_id", null: false
+    t.integer "order_item_id",  null: false
+    t.index ["add_on_link_id", "order_item_id"], name: "add_on_link_order_item", using: :btree
+    t.index ["order_item_id", "add_on_link_id"], name: "order_item_add_on_link", using: :btree
   end
 
   create_table "add_on_type_links", force: :cascade do |t|
@@ -68,21 +75,6 @@ ActiveRecord::Schema.define(version: 20170123082445) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_cities_on_name", unique: true, using: :btree
-  end
-
-  create_table "combos", force: :cascade do |t|
-    t.string   "name"
-    t.decimal  "discount",   default: "0.0"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.index ["name"], name: "index_combos_on_name", unique: true, using: :btree
-  end
-
-  create_table "combos_dishes", id: false, force: :cascade do |t|
-    t.integer "combo_id", null: false
-    t.integer "dish_id",  null: false
-    t.index ["combo_id", "dish_id"], name: "index_combos_dishes_on_combo_id_and_dish_id", using: :btree
-    t.index ["dish_id", "combo_id"], name: "index_combos_dishes_on_dish_id_and_combo_id", using: :btree
   end
 
   create_table "coupon_categories", force: :cascade do |t|
@@ -214,15 +206,14 @@ ActiveRecord::Schema.define(version: 20170123082445) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.string   "purchasable_type"
-    t.integer  "purchasable_id"
     t.integer  "order_id"
     t.integer  "quantity"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.string   "ordered",          default: "{}", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "dish_variant_id"
+    t.text     "note"
+    t.index ["dish_variant_id"], name: "index_order_items_on_dish_variant_id", using: :btree
     t.index ["order_id"], name: "index_order_items_on_order_id", using: :btree
-    t.index ["purchasable_type", "purchasable_id"], name: "index_order_items_on_purchasable_type_and_purchasable_id", using: :btree
   end
 
   create_table "order_statuses", force: :cascade do |t|
@@ -363,5 +354,6 @@ ActiveRecord::Schema.define(version: 20170123082445) do
   end
 
   add_foreign_key "coupons", "coupon_categories"
+  add_foreign_key "order_items", "dish_variants"
   add_foreign_key "users", "locations"
 end

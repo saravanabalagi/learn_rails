@@ -6,7 +6,6 @@ class Dish < ApplicationRecord
   has_many :order_items, through: :dish_variants
   has_many :feel_links, as: :feelable
   has_and_belongs_to_many :cuisines
-  has_and_belongs_to_many :combos
 
   has_one :location, through: :restaurant
 
@@ -49,9 +48,6 @@ class Dish < ApplicationRecord
         hide
       end
       configure :order_items do
-        hide
-      end
-      configure :combos do
         hide
       end
     end

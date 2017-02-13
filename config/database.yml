@@ -4,7 +4,7 @@ development:
   database: learn_rails_development
   pool: 5
   username: Zeke
-  password:
+  password: password
 
 test: &TEST
   adapter: postgresql
@@ -12,7 +12,7 @@ test: &TEST
   database: learn_rails_test
   pool: 5
   username: Zeke
-  password:
+  password: password
 
 production:
   adapter: postgresql
@@ -20,4 +20,4 @@ production:
   database: learn_rails_production
   pool: 5
   username: Zeke
-  password:
+  password: password

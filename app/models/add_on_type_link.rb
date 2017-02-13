@@ -2,6 +2,7 @@ class AddOnTypeLink < ApplicationRecord
   belongs_to :add_on_type
   belongs_to :addonable, polymorphic: true
   has_many :add_on_links
+  has_and_belongs_to_many :order_items
 
   validates_presence_of :add_on_type, :addonable
   validates_presence_of :min
