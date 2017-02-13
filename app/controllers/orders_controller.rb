@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
 
   # GET /cart
   def cart
-    render json: @cart
+    render json: @cart, include: [:order_status, :payment_method,:order_items]
   end
 
   # POST /cart/purchase/cod
@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
     cart = {}
     cart[:errors] = []
 
-    order_params[:cart_dish_variants].each do |order_item_params|
+    order_params[:order_items].each do |order_item_params|
       @order_item = OrderItem.new
       @order_item.dish_variant = DishVariant.find(order_item_params.dish_variant_id)
       @order_item.note = order_item_params[:note]
@@ -69,6 +69,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.fetch(:cart_dish_variants, {}).permit(:dish_variant_id, :quantity, :note, :add_on_link_ids)
+    params.fetch(:order_items, {}).permit(:dish_variant_id, :quantity, :note, :add_on_link_ids)
   end
 end
