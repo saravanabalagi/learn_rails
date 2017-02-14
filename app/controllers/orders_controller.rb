@@ -5,18 +5,18 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    render json: @orders, include: [:order_status,:payment_method,:order_items]
+    render json: @orders, include: :order_items
   end
 
   # GET /orders/1
   def show
     @order = @orders.find(params[:id])
-    render json: @order, include: [:order_status, :payment_method,:order_items]
+    render json: @order, include: :order_status
   end
 
   # GET /cart
   def cart
-    render json: @cart, include: [:order_status, :payment_method,:order_items]
+    render json: @cart, include: :order_status
   end
 
   # POST /cart/purchase/cod

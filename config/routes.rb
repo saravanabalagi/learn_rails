@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'payment_methods/show'
+
+  get 'order_statuses/show'
+
   get 'dish_variant/show'
 
   # Admin Panel
@@ -61,6 +65,12 @@ Rails.application.routes.draw do
   # Orders
   get 'orders' => 'orders#index'
   get 'orders/:id' => 'orders#show'
+
+  # OrderStatuses
+  get 'order_statuses/:id' => 'order_statuses#show'
+
+  # PaymentMethods
+  get 'payment_methods/:id' => 'payment_methods#show'
 
   # Users
   get 'users/me' => 'users#me'
