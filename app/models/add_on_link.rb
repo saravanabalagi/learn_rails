@@ -3,6 +3,8 @@ class AddOnLink < ApplicationRecord
   belongs_to :add_on_type_link
   has_many :feel_links, as: :feelable
 
+  has_and_belongs_to_many :order_items
+
   validates_presence_of :price
   validates_uniqueness_of :add_on, scope: :add_on_type_link
 
