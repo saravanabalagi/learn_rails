@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
 
     order_params[:order_items].each do |order_item_params|
       @order_item = OrderItem.new
-      @order_item.dish_variant = DishVariant.find(order_item_params.dish_variant_id)
+      @order_item.dish_variant = DishVariant.find(order_item_params[:dish_variant_id])
       @order_item.note = order_item_params[:note]
       @order_item.quantity = order_item_params[:quantity]
       order_item_params[:add_on_link_ids].each { |add_on_link_id| @order_item.add_on_links.push(AddOnLink.find(add_on_link_id)) }
@@ -69,6 +69,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.fetch(:order_items, {}).permit(:dish_variant_id, :quantity, :note, :add_on_link_ids)
+    params.permit(order_items: [:dish_variant_id, :quantity, :note, add_on_link_ids: []])
   end
 end
