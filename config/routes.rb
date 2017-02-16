@@ -36,6 +36,9 @@ Rails.application.routes.draw do
   get 'cities' => 'cities#index'
   get 'cities/:id/locations' => 'cities#locations'
 
+  # Locations
+  get 'locations/:id' => 'locations#show'
+
   # DishCategories
   get 'dish_categories' => 'dish_categories#index'
   get 'dish_categories/:id' => 'dish_categories#show'
