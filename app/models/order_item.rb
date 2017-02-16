@@ -5,7 +5,7 @@ class OrderItem < ApplicationRecord
   has_and_belongs_to_many :add_on_links
 
   after_commit do
-    self.order.reload.update_total
+    self.order && self.order.reload.update_total
   end
 
   validates_presence_of :order

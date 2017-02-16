@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :order_status
   belongs_to :payment_method
-  has_many :order_items
+  has_many :order_items, :dependent => :destroy
 
   validates_presence_of :user
   # validates_presence_of :sub_total, :delivery, :vat, :total
