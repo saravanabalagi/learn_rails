@@ -9,6 +9,18 @@ class UsersController < ApplicationController
     render json: @me
   end
 
+  # POST /users/me/location
+  def set_location
+    @location = Location.find(location_params[id])
+    @me = current_user
+    @me.location = @location
+    if @me.save
+      render json: @location, status: :ok
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
   # GET /users/1
   # def show
   #   render json: @user, only: [:name]
@@ -65,6 +77,10 @@ class UsersController < ApplicationController
 
     def oauth_params
       params.fetch(:oauth, {}).permit(:access_token, :provider)
+    end
+
+    def location_params
+      params.fetch(:location, {}).permit(:id)
     end
 
 end

@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'payment_methods/show'
-
-  get 'order_statuses/show'
-
-  get 'dish_variant/show'
-
   # Admin Panel
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
@@ -74,6 +68,8 @@ Rails.application.routes.draw do
 
   # Users
   get 'users/me' => 'users#me'
+  post 'users/me/location' => 'users#set_location'
+  patch 'users/me/location' => 'users#set_location'
   post 'users/create' => 'users#create'
   patch 'users/me' => 'users#me'
 
