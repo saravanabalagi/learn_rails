@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   # Cities
   get 'cities' => 'cities#index'
+  get 'cities/:id' => 'cities#show'
   get 'cities/:id/locations' => 'cities#locations'
 
   # Locations
