@@ -1,14 +1,14 @@
 class OrderItem < ApplicationRecord
   belongs_to :dish_variant
-  belongs_to :order
+  belongs_to :restaurant_order
 
   has_and_belongs_to_many :add_on_links
 
   after_commit do
-    self.order && self.order.reload.update_total
+    self.restaurant_order&.order && self.restaurant_order.order.reload.update_total
   end
 
-  validates_presence_of :order
+  validates_presence_of :restaurant_order
   validates_presence_of :quantity
 
   def name

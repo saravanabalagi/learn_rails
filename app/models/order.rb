@@ -2,14 +2,15 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :order_status
   belongs_to :payment_method
-  has_many :order_items, :dependent => :destroy
+
+  has_many :restaurant_orders, :dependent => :destroy
 
   validates_presence_of :user
   # validates_presence_of :sub_total, :delivery, :vat, :total
 
   before_create :set_order_status
 
-  accepts_nested_attributes_for :order_items, allow_destroy: true
+  accepts_nested_attributes_for :restaurant_orders, allow_destroy: true
 
   include ActionView::Helpers::DateHelper
   def name
@@ -47,8 +48,10 @@ class Order < ApplicationRecord
 
   def update_sub_total
     self.sub_total = 0
-    self.order_items.each do |order_item|
-      self.sub_total += order_item.price
+    self.restaurant_orders.each do |restaurant_order|
+      restaurant_order.order_items.each do |order_item|
+        self.sub_total += order_item.price
+      end
     end
   end
 

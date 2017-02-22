@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213133816) do
+ActiveRecord::Schema.define(version: 20170222035809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -206,14 +206,14 @@ ActiveRecord::Schema.define(version: 20170213133816) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.integer  "order_id"
-    t.integer  "quantity"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
     t.integer  "dish_variant_id"
+    t.integer  "quantity"
     t.text     "note"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "restaurant_order_id"
     t.index ["dish_variant_id"], name: "index_order_items_on_dish_variant_id", using: :btree
-    t.index ["order_id"], name: "index_order_items_on_order_id", using: :btree
+    t.index ["restaurant_order_id"], name: "index_order_items_on_restaurant_order_id", using: :btree
   end
 
   create_table "order_statuses", force: :cascade do |t|
@@ -265,6 +265,19 @@ ActiveRecord::Schema.define(version: 20170213133816) do
     t.index ["dish_id"], name: "index_ratings_on_dish_id", using: :btree
     t.index ["user_id", "dish_id"], name: "index_ratings_on_user_id_and_dish_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_ratings_on_user_id", using: :btree
+  end
+
+  create_table "restaurant_orders", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "restaurant_id"
+    t.integer  "order_status_id"
+    t.integer  "coupon_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["coupon_id"], name: "index_restaurant_orders_on_coupon_id", using: :btree
+    t.index ["order_id"], name: "index_restaurant_orders_on_order_id", using: :btree
+    t.index ["order_status_id"], name: "index_restaurant_orders_on_order_status_id", using: :btree
+    t.index ["restaurant_id"], name: "index_restaurant_orders_on_restaurant_id", using: :btree
   end
 
   create_table "restaurant_phones", force: :cascade do |t|
@@ -353,7 +366,36 @@ ActiveRecord::Schema.define(version: 20170213133816) do
     t.index ["variant_category_id"], name: "index_variants_on_variant_category_id", using: :btree
   end
 
+  add_foreign_key "add_on_links", "add_on_type_links"
+  add_foreign_key "add_on_links", "add_ons"
+  add_foreign_key "add_on_type_links", "add_on_types"
+  add_foreign_key "add_ons", "add_on_types"
   add_foreign_key "coupons", "coupon_categories"
+  add_foreign_key "dish_variants", "dishes"
+  add_foreign_key "dish_variants", "food_labels"
+  add_foreign_key "dish_variants", "variants"
+  add_foreign_key "dishes", "dish_categories"
+  add_foreign_key "dishes", "restaurants"
+  add_foreign_key "feel_links", "feels"
+  add_foreign_key "feels", "feel_categories"
+  add_foreign_key "locations", "cities"
   add_foreign_key "order_items", "dish_variants"
+  add_foreign_key "order_items", "restaurant_orders"
+  add_foreign_key "orders", "coupons"
+  add_foreign_key "orders", "order_statuses"
+  add_foreign_key "orders", "payment_methods"
+  add_foreign_key "orders", "users"
+  add_foreign_key "ratings", "dishes"
+  add_foreign_key "ratings", "users"
+  add_foreign_key "restaurant_orders", "coupons"
+  add_foreign_key "restaurant_orders", "order_statuses"
+  add_foreign_key "restaurant_orders", "orders"
+  add_foreign_key "restaurant_orders", "restaurants"
+  add_foreign_key "restaurant_phones", "phone_types"
+  add_foreign_key "restaurant_phones", "restaurants"
+  add_foreign_key "restaurant_timings", "restaurants"
+  add_foreign_key "restaurants", "brands"
+  add_foreign_key "restaurants", "locations"
   add_foreign_key "users", "locations"
+  add_foreign_key "variants", "variant_categories"
 end
