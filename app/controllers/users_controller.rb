@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   # GET /users/me
   def me
-    render json: @me
+    render json: @me, include: :roles
   end
 
   # POST /users/me/location
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       set_uid_and_provider
-      render json: @user, status: :created, location: @user
+      render status: :created, json: @user, include: :roles
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       set_uid_and_provider
-      render json: @user
+      render json: @user, include: :roles
     else
       render json: @user.errors, status: :unprocessable_entity
     end
