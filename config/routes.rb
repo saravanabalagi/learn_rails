@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  namespace :vendor do
+    get 'restaurant_orders' => 'restaurant_orders#index'
+    get 'restaurant_orders/:id' => 'restaurant_orders#show'
+  end
+
   # Admin Panel
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
