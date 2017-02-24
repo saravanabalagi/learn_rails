@@ -1,4 +1,6 @@
 class Restaurant < ApplicationRecord
+  resourcify
+
   belongs_to :location
   belongs_to :brand
   has_many :dishes
