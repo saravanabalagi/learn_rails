@@ -22,6 +22,7 @@ class Vendor::RestaurantOrdersController < ApplicationController
     @restaurant_order = @restaurant_orders.find(params[:id])
     @restaurant_order.order_status = OrderStatus.find_by(name: 'Accepted')
     if @restaurant_order.save
+      BroadcastOrderJob.perform_later @restaurant_order.order
       render json: @restaurant_order,
                 include: { order_items: { methods: :add_on_link_ids } },
                 methods: [:total, :ordered_at, :payment_method_id]
@@ -35,6 +36,7 @@ class Vendor::RestaurantOrdersController < ApplicationController
     @restaurant_order = @restaurant_orders.find(params[:id])
     @restaurant_order.order_status = OrderStatus.find_by(name: 'Rejected')
     if @restaurant_order.save
+      BroadcastOrderJob.perform_later @restaurant_order.order
       render json: @restaurant_order,
                 include: { order_items: { methods: :add_on_link_ids } },
                 methods: [:total, :ordered_at, :payment_method_id]
@@ -48,6 +50,7 @@ class Vendor::RestaurantOrdersController < ApplicationController
     @restaurant_order = @restaurant_orders.find(params[:id])
     @restaurant_order.order_status = OrderStatus.find_by(name: 'Ready')
     if @restaurant_order.save
+      BroadcastOrderJob.perform_later @restaurant_order.order
       render json: @restaurant_order,
                 include: { order_items: { methods: :add_on_link_ids } },
                 methods: [:total, :ordered_at, :payment_method_id]
@@ -61,6 +64,7 @@ class Vendor::RestaurantOrdersController < ApplicationController
     @restaurant_order = @restaurant_orders.find(params[:id])
     @restaurant_order.order_status = OrderStatus.find_by(name: 'Completed')
     if @restaurant_order.save
+      BroadcastOrderJob.perform_later @restaurant_order.order
       render json: @restaurant_order,
                 include: { order_items: { methods: :add_on_link_ids } },
                 methods: [:total, :ordered_at, :payment_method_id]
