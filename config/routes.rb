@@ -93,4 +93,7 @@ Rails.application.routes.draw do
   post 'users/create' => 'users#create'
   patch 'users/me' => 'users#me'
 
+  # ActionCable
+  mount ActionCable.server => '/cable'
+
 end

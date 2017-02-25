@@ -22,6 +22,10 @@ class OrdersController < ApplicationController
   # POST /cart/purchase/cod
   def purchase_cod
     @cart.purchase_by_cod
+    @cart.restaurant_order.each do |restaurant_order|
+      ActionCable.server.broadcast 'order_restaurant_'+restaurant_order.restaurant_id.to_s,
+                                   order: restaurant_order, include: { restaurant_orders: { include: {order_items: { methods: :add_on_link_ids}}} }
+    end
     render json: @cart, include: { restaurant_orders: { include: {order_items: { methods: :add_on_link_ids}}} }
   end
 
