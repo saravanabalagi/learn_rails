@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
       @restaurant_order = RestaurantOrder.new
       @restaurant_order.order = @cart
       @restaurant_order.restaurant = Restaurant.find(restaurant_order[:restaurant_id])
-      @restaurant_order.order_status = OrderStatus.find_by_name('Purchased')
+      @restaurant_order.order_status = OrderStatus.find_by_name('Initiated')
       if @restaurant_order.save
         restaurant_order[:order_items].each do |order_item_params|
           @order_item = OrderItem.new
