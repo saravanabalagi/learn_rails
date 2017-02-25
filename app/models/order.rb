@@ -21,6 +21,10 @@ class Order < ApplicationRecord
 
   def purchase_by_cod
     self.order_status = OrderStatus.find_by(name: 'Purchased')
+    self.restaurant_orders.each do |restaurant_order|
+      restaurant_order.order_status = self.order_status
+      restaurant_order.save
+    end
     self.payment_method = PaymentMethod.find_by(name: 'COD')
     self.ordered_at = DateTime.now
     self.save
@@ -30,7 +34,6 @@ class Order < ApplicationRecord
     self.order_status = OrderStatus.find_by(name: 'Initiated')
   end
 
-  #TODO update ordered_at when order_status changes
   def update_time
     self.ordered_at = DateTime.now
     self.save
