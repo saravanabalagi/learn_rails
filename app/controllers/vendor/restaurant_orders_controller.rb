@@ -77,6 +77,8 @@ class Vendor::RestaurantOrdersController < ApplicationController
                           .where(name: 'restaurant_admin', resource_type: 'Restaurant')[0]
                           .resource_id
       @restaurant_orders = RestaurantOrder.where(restaurant_id: restaurant_id)
+                               .joins(:order_status)
+                               .where.not('order_statuses.name': 'Initiated')
     else
       render status: :unauthorized
     end
