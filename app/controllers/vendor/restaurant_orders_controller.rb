@@ -17,6 +17,58 @@ class Vendor::RestaurantOrdersController < ApplicationController
            methods: [:total, :ordered_at, :payment_method_id]
   end
 
+  # PATCH/PUT /vendor/restaurant_orders/1/approve
+  def approve
+    @restaurant_order = @restaurant_orders.find(params[:id])
+    @restaurant_order.order_status = OrderStatus.find_by(name: 'Accepted')
+    if @restaurant_order.save
+      render json: @restaurant_order,
+                include: { order_items: { methods: :add_on_link_ids } },
+                methods: [:total, :ordered_at, :payment_method_id]
+    else
+      render ststus: :unprocessable_entity, json: @restaurant_order.errors
+    end
+  end
+
+  # PATCH/PUT /vendor/restaurant_orders/1/reject
+  def reject
+    @restaurant_order = @restaurant_orders.find(params[:id])
+    @restaurant_order.order_status = OrderStatus.find_by(name: 'Rejected')
+    if @restaurant_order.save
+      render json: @restaurant_order,
+                include: { order_items: { methods: :add_on_link_ids } },
+                methods: [:total, :ordered_at, :payment_method_id]
+    else
+      render ststus: :unprocessable_entity, json: @restaurant_order.errors
+    end
+  end
+
+  # PATCH/PUT /vendor/restaurant_orders/1/ready
+  def ready
+    @restaurant_order = @restaurant_orders.find(params[:id])
+    @restaurant_order.order_status = OrderStatus.find_by(name: 'Ready')
+    if @restaurant_order.save
+      render json: @restaurant_order,
+                include: { order_items: { methods: :add_on_link_ids } },
+                methods: [:total, :ordered_at, :payment_method_id]
+    else
+      render ststus: :unprocessable_entity, json: @restaurant_order.errors
+    end
+  end
+
+  # PATCH/PUT /vendor/restaurant_orders/1/collected
+  def collected
+    @restaurant_order = @restaurant_orders.find(params[:id])
+    @restaurant_order.order_status = OrderStatus.find_by(name: 'Completed')
+    if @restaurant_order.save
+      render json: @restaurant_order,
+                include: { order_items: { methods: :add_on_link_ids } },
+                methods: [:total, :ordered_at, :payment_method_id]
+    else
+      render ststus: :unprocessable_entity, json: @restaurant_order.errors
+    end
+  end
+
   private
 
   def set_restaurant_orders

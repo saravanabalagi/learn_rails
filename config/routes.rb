@@ -1,8 +1,19 @@
 Rails.application.routes.draw do
 
+  # Vendor Panel
   namespace :vendor do
     get 'restaurant_orders' => 'restaurant_orders#index'
     get 'restaurant_orders/:id' => 'restaurant_orders#show'
+
+    patch 'restaurant_orders/:id/approve' => 'restaurant_orders#approve'
+    patch 'restaurant_orders/:id/reject' => 'restaurant_orders#reject'
+    patch 'restaurant_orders/:id/ready' => 'restaurant_orders#ready'
+    patch 'restaurant_orders/:id/collected' => 'restaurant_orders#collected'
+
+    put 'restaurant_orders/:id/approve' => 'restaurant_orders#approve'
+    put 'restaurant_orders/:id/reject' => 'restaurant_orders#reject'
+    put 'restaurant_orders/:id/ready' => 'restaurant_orders#ready'
+    put 'restaurant_orders/:id/collected' => 'restaurant_orders#collected'
   end
 
   # Admin Panel
