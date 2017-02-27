@@ -17,7 +17,7 @@ class OrderChannel < ApplicationCable::Channel
                           .resource_id
       'restaurant_' + restaurant_id.to_s
     else
-      'user_' + current_user.id
+      'user_' + current_user.id.to_s
     end
   end
 

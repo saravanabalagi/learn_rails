@@ -3,6 +3,6 @@ class BroadcastOrderJob < ApplicationJob
 
   def perform(order)
     ActionCable.server.broadcast 'order_user_'+order.user_id.to_s,
-                                 order: order, include: { restaurant_orders: { include: {order_items: { methods: :add_on_link_ids}}} }
+                                 order: order.as_json(include: { restaurant_orders: { include: {order_items: { methods: :add_on_link_ids}}} })
   end
 end

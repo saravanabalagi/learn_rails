@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
   # POST /cart/purchase/cod
   def purchase_cod
     @cart.purchase_by_cod
-    @cart.restaurant_order.each do |restaurant_order|
+    @cart.restaurant_orders.each do |restaurant_order|
       BroadcastRestaurantOrderJob.perform_later restaurant_order
     end
     render json: @cart, include: { restaurant_orders: { include: {order_items: { methods: :add_on_link_ids}}} }
