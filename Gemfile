@@ -31,3 +31,6 @@ gem 'carrierwave', '>= 1.0.0.beta'
 # Web Server
 gem 'puma', '~> 3.0'
 gem 'rack-cors'
+
+# Pagination
+gem 'kaminari'
