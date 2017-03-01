@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    render json: @orders, include: { restaurant_orders: { include: {order_items: { methods: :add_on_link_ids}}} }
+    render json: @orders.page(params[:page]), include: { restaurant_orders: { include: {order_items: { methods: :add_on_link_ids}}} }
   end
 
   # GET /orders/1

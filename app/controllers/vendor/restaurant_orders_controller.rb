@@ -4,7 +4,7 @@ class Vendor::RestaurantOrdersController < ApplicationController
 
   # GET /vendor/restaurant_orders
   def index
-    render json: @restaurant_orders,
+    render json: @restaurant_orders.page(params[:page]),
            include: { order_items: { methods: :add_on_link_ids } },
            methods: [:total, :ordered_at, :payment_method_id]
   end
