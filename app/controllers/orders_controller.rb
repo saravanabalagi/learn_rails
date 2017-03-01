@@ -2,10 +2,12 @@ class OrdersController < ApplicationController
   before_action :authenticate_user
   before_action :set_orders
   before_action :set_cart
+  after_action Proc.new{ set_pagination_header(:paged_orders) }, only: [:index]
 
   # GET /orders
   def index
-    render json: @orders.page(params[:page]), include: { restaurant_orders: { include: {order_items: { methods: :add_on_link_ids}}} }
+    @paged_orders = @orders.page(params[:page])
+    render json: @paged_orders, include: { restaurant_orders: { include: {order_items: { methods: :add_on_link_ids}}} }
   end
 
   # GET /orders/1
