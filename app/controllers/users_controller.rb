@@ -29,8 +29,8 @@ class UsersController < ApplicationController
   # POST /users/create
   def create
     @user = User.new(user_params)
+    set_uid_and_provider
     if @user.save
-      set_uid_and_provider
       render status: :created, json: @user, include: :roles
     else
       render json: @user.errors, status: :unprocessable_entity
@@ -39,8 +39,8 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/me
   def update
+    set_uid_and_provider
     if @user.update(user_params)
-      set_uid_and_provider
       render json: @user, include: :roles
     else
       render json: @user.errors, status: :unprocessable_entity
@@ -60,11 +60,12 @@ class UsersController < ApplicationController
     def set_uid_and_provider
       if oauth_params[:access_token].present? && oauth_params[:provider].present?
         if oauth_params[:provider] == 'facebook'
-          uid = FacebookService.fetch_uid(oauth_params[:access_token])
-          if uid.present?
-            @user.uid = uid
+          if FacebookService.valid_token? oauth_params[:access_token]
+            user_data = FacebookService.fetch_data oauth_params[:access_token]
             @user.provider = oauth_params[:provider]
-            @user.save
+            @user.uid = user_data['id']
+            @uesr.name = user_data['first_name'] + ' ' + user_data['last_name']
+            @uesr.email = user_data['email'] unless user_data['email'].nil?
           end
         end
       end
