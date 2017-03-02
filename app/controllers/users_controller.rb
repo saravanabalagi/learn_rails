@@ -64,8 +64,8 @@ class UsersController < ApplicationController
             user_data = FacebookService.fetch_data oauth_params[:access_token]
             @user.provider = oauth_params[:provider]
             @user.uid = user_data['id']
-            @uesr.name = user_data['first_name'] + ' ' + user_data['last_name']
-            @uesr.email = user_data['email'] unless user_data['email'].nil?
+            @user.name = user_data['first_name'] + ' ' + user_data['last_name']
+            @user.email = user_data['email'] unless user_data['email'].nil?
           end
         end
       end
