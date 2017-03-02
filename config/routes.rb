@@ -21,8 +21,7 @@ Rails.application.routes.draw do
 
   # Authentication
   post '/auth' => 'user_token#create'
-  post '/auth/facebook' => 'auth_facebook#create'
-  post '/auth/facebook/fetch_details' => 'auth_facebook#fetch_details'
+  post '/auth/facebook' => 'oauth#create'
 
   # Verification
   get '/auth/verify' => 'verify_user#get_otp'
