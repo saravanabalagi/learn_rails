@@ -1,11 +1,11 @@
 class User < ApplicationRecord
   rolify
-  has_secure_password
+  has_secure_password validations: false
 
   before_create :randomize_id, :titleize_name
   after_create :assign_default_role
 
-  validates :password, length: { minimum: 8 }, allow_nil: true, on: :create, unless: Proc.new{|u| u.uid.present? && u.provider.present?}
+  validates :password, length: { minimum: 8 }, allow_nil: true, unless: Proc.new { |u| u.uid.present? && u.provider.present? }
   validates :email, format: { with: /\A.+@.+$\Z/ }
   validates :mobile, length: { is: 10 }
 
@@ -19,6 +19,14 @@ class User < ApplicationRecord
   def as_json(options={})
     options[:except] ||= [:password_digest]
     super(options)
+  end
+
+  def set_password; nil; end
+
+  def set_password=(value)
+    return nil if value.blank?
+    self.password = value
+    self.password_confirmation = value
   end
 
   private
@@ -41,25 +49,17 @@ class User < ApplicationRecord
   end
 
   rails_admin do
-    configure :password_digest do
-      hide
-    end
+    configure(:set_password)
+    configure(:password_digest) { hide }
     edit do
-      configure :coupons do
-        hide
-      end
-      configure :orders do
-        hide
-      end
-      configure :password, :string do
-        help 'Required. Minimum 8 Characters'
-      end
-      configure :uid do
-        hide
-      end
-      configure :provider do
-        hide
-      end
+      exclude_fields :password
+      include_fields :set_password
+      configure(:coupons) { hide }
+      configure(:orders) { hide }
+      configure(:password, :string) { help 'Required. Minimum 8 Characters' }
+      configure(:set_password) { help 'Leave blank to retain old password' }
+      configure(:uid) { hide }
+      configure(:provider) { hide }
     end
   end
 
